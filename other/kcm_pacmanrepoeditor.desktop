@@ -1,0 +1,14 @@
+[Desktop Entry]
+Icon=database-chakra
+Type=Service
+X-KDE-ServiceTypes=KCModule
+Exec=kcmshell4 kcm_pacmanrepoeditor
+
+X-KDE-Library=kcm_pacmanrepoeditor
+X-KDE-ParentApp=kcontrol
+X-KDE-System-Settings-Parent-Category=system-administration
+
+Name=Chakra Repositories Editor
+Comment=Manage Chakra repositories
+X-KDE-Keywords=repository,editor
+Categories=Qt;KDE;X-KDE-settings-system;

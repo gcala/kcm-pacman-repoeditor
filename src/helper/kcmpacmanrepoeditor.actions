@@ -1,0 +1,9 @@
+[Domain]
+Name=Chakra Repositories Editor KDE control module
+Icon=database-chakra
+
+[org.kde.kcontrol.kcmpacmanrepoeditor.save]
+Name=Save pacman settings
+Description=Administrator authorization is required to save pacman settings
+Policy=auth_admin
+Persistence=session

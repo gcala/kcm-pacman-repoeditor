@@ -1,0 +1,1 @@
+install(FILES kcm_pacmanrepoeditor.desktop DESTINATION ${SERVICES_INSTALL_DIR})
