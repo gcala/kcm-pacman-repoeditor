@@ -222,6 +222,11 @@ void KcmPacmanRepoEditor::defaults()
     repoConf->loadConf();
 }
 
+void KcmPacmanRepoEditor::load()
+{
+    repoConf->loadConf();
+}
+
 void KcmPacmanRepoEditor::save()
 {
     QString pacmanConfFileContents = repoConf->toString();

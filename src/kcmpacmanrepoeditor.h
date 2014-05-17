@@ -44,6 +44,7 @@ class KcmPacmanRepoEditor : public KCModule
     
     void defaults();
     void save();
+    void load();
         
   private:
     Ui::KcmPacmanRepoEditor ui;
