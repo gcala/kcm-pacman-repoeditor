@@ -1,0 +1,190 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Giuseppe Calà <jiveaxe@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/gcala/kcmpacmanrepoeditor/issues\n"
+"POT-Creation-Date: 2014-05-18 11:13+0200\n"
+"PO-Revision-Date: 2014-05-18 11:16+0200\n"
+"Last-Translator: Giuseppe Calà <jiveaxe@gmail.com>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#. i18n: file: ui/addrepo.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, AddRepo)
+#: build/src/ui_addrepo.h:147 po/rc.cpp:3 rc.cpp:3
+msgid "Add/Modify Repository"
+msgstr "Aggiungi/Modifica Repository"
+
+#. i18n: file: ui/addrepo.ui:22
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: build/src/ui_addrepo.h:148 po/rc.cpp:6 rc.cpp:6
+msgid "Repository:"
+msgstr "Repository:"
+
+#. i18n: file: ui/addrepo.ui:32
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, repo)
+#: build/src/ui_addrepo.h:149 po/rc.cpp:9 rc.cpp:9
+msgid "Repository Name"
+msgstr "Nome repository"
+
+#. i18n: file: ui/addrepo.ui:39
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: build/src/ui_addrepo.h:150 po/rc.cpp:12 rc.cpp:12
+msgid "Location:"
+msgstr "Posizione:"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:59
+#. i18n: ectx: property (text), widget (QPushButton, add)
+#: build/src/ui_kcmpacmanrepoeditor.h:194 po/rc.cpp:15 rc.cpp:15
+msgid "Add"
+msgstr "Aggiungi"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:74
+#. i18n: ectx: property (text), widget (QPushButton, edit)
+#: build/src/ui_kcmpacmanrepoeditor.h:195 po/rc.cpp:18 rc.cpp:18
+msgid "Edit"
+msgstr "Modifica"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:89
+#. i18n: ectx: property (text), widget (QPushButton, remove)
+#: build/src/ui_kcmpacmanrepoeditor.h:196 po/rc.cpp:21 rc.cpp:21
+msgid "Remove"
+msgstr "Rimuovi"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:117
+#. i18n: ectx: property (text), widget (QPushButton, moveUp)
+#: build/src/ui_kcmpacmanrepoeditor.h:197 po/rc.cpp:24 rc.cpp:24
+msgid "Move Up"
+msgstr "Sposta su"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:132
+#. i18n: ectx: property (text), widget (QPushButton, moveDown)
+#: build/src/ui_kcmpacmanrepoeditor.h:198 po/rc.cpp:27 rc.cpp:27
+msgid "Move Down"
+msgstr "Sposta giù"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:152
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: build/src/ui_kcmpacmanrepoeditor.h:199 po/rc.cpp:30 rc.cpp:30
+msgid "Available Repositories"
+msgstr "Repository disponibili"
+
+#. i18n: file: ui/kcmpacmanrepoeditor.ui:164
+#. i18n: ectx: property (text), widget (QPushButton, loadBackup)
+#: build/src/ui_kcmpacmanrepoeditor.h:200 po/rc.cpp:33 rc.cpp:33
+msgid "Load a backup file"
+msgstr "Carica un file di backup"
+
+#: po/rc.cpp:34 rc.cpp:34
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Giuseppe Calà"
+
+#: po/rc.cpp:35 rc.cpp:35
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "jiveaxe@gmail.com"
+
+#: src/addrepo.cpp:90
+msgid ""
+"Can't add repository.\n"
+"The repository name field can't be blank."
+msgstr ""
+"Non è possibile aggiungere il repository.\n"
+"Il nome del repository non può essere vuoto."
+
+#: src/addrepo.cpp:105
+msgid ""
+"Can't add repository.\n"
+"The repository location field is not valid."
+msgstr ""
+"Non è possibile aggiungere il repository.\n"
+"La posizione del repository non è valida."
+
+#: src/addrepo.cpp:108
+msgid ""
+"Can't add repository.\n"
+"The repository name field is not valid."
+msgstr ""
+"Non è possibile aggiungere il repository.\n"
+"Il nome del repository non è valido."
+
+#: src/addrepo.cpp:115
+msgid "Address of remote or local packages repository"
+msgstr "Indirizzo locale o remoto del repository dei pacchetti"
+
+#: src/addrepo.cpp:119
+msgid "Path to mirrors list file"
+msgstr "Percorso dell'elenco dei mirror"
+
+#: src/addrepo.cpp:130
+msgid "Select local repository"
+msgstr "Seleziona un repository locale"
+
+#: src/addrepo.cpp:143
+msgid "Select mirrors list"
+msgstr "Seleziona l'elenco dei mirror"
+
+#: src/kcmpacmanrepoeditor.cpp:43
+msgctxt "@title"
+msgid "Chakra's Repositories Control Module"
+msgstr "Modulo di controllo dei repository di Chakra"
+
+#: src/kcmpacmanrepoeditor.cpp:45
+msgctxt "@title"
+msgid "A KDE Control Module for Chakra's repositories management."
+msgstr "Il modulo di controllo di KDE per la gestione dei repository di Chakra"
+
+#: src/kcmpacmanrepoeditor.cpp:46
+msgctxt "@info:credit"
+msgid "Copyright (C) 2014 Giuseppe Calà"
+msgstr ""
+
+#: src/kcmpacmanrepoeditor.cpp:48
+msgctxt "@info:credit"
+msgid "Giuseppe Calà"
+msgstr ""
+
+#: src/kcmpacmanrepoeditor.cpp:49
+msgctxt "@info:credit"
+msgid "Main Developer"
+msgstr "Sviluppatore principale"
+
+#: src/kcmpacmanrepoeditor.cpp:109
+msgid "Select backup file"
+msgstr "Seleziona un file di backup"
+
+#: src/kcmpacmanrepoeditor.cpp:117
+msgid ""
+"Can't load backup file.\n"
+"Selected file is not valid."
+msgstr ""
+"Non è possibile caricare il file di backup.\n"
+"Il file selezionato non è valido."
+
+#: src/kcmpacmanrepoeditor.cpp:257
+msgid "Unable to authenticate/execute the action: code %1"
+msgstr "Impossibile autenticare/eseguire l'azione: codice %1"
+
+#: src/kcmpacmanrepoeditor.cpp:259
+msgid ""
+"Unable to write the (%1) file:\n"
+"%2"
+msgstr ""
+"Impossibile scrivere nel file (%1):\n"
+"%2"
+
+#: src/kcmpacmanrepoeditor.cpp:261
+msgid "/etc/pacman.conf successfully saved"
+msgstr "/etc/pacman.conf salvato correttamente"
+
+#~ msgid "Configuration files succesfully written to: /etc/pacman.conf"
+#~ msgstr "File di configurazione scritto con successo su /etc/pacman.conf"

@@ -38,6 +38,9 @@ K_EXPORT_PLUGIN(kcmpacmanrepoeditorFactory("KcmPacmanRepoEditor"))
 KcmPacmanRepoEditor::KcmPacmanRepoEditor( QWidget *parent, const QVariantList &list )
     : KCModule( kcmpacmanrepoeditorFactory::componentData(), parent, list )
 {
+    // load translations
+    KGlobal::locale()->insertCatalog("kcmpacmanrepoeditor");
+    
     KAboutData *about = new KAboutData( "kcmpacmanrepoeditor", 
                                         "kcmpacmanrepoeditor", 
                                         ki18nc( "@title", "Chakra's Repositories Control Module" ), 
@@ -72,8 +75,9 @@ KcmPacmanRepoEditor::KcmPacmanRepoEditor( QWidget *parent, const QVariantList &l
                           SLOT( moveDown() ) );
 
     QItemSelectionModel *selModel = ui.tableView->selectionModel();
-    connect( selModel, SIGNAL( selectionChanged( QItemSelection,QItemSelection ) ),
-                       SLOT( updateMovers( QItemSelection,QItemSelection ) ) );
+    
+    connect( selModel, SIGNAL( selectionChanged(QItemSelection,QItemSelection) ),
+                       SLOT( updateMovers(QItemSelection,QItemSelection) ) );
 
     connect( ui.remove, SIGNAL( clicked() ),
                         SLOT( removeEntry() ) );
@@ -88,10 +92,12 @@ KcmPacmanRepoEditor::KcmPacmanRepoEditor( QWidget *parent, const QVariantList &l
                             SLOT( loadBackup() ) );
 
     ui.tableView->selectRow( 0 );
+    
+    ui.edit->setEnabled(false);  
+    ui.moveDown->setEnabled(false);
+    ui.remove->setEnabled(false);
   
-  
-  
-//   // Use kde4-config to get kde prefix
+    // Use kde4-config to get kde prefix
     kdeConfig = new QProcess(this);
     connect(kdeConfig, SIGNAL(readyReadStandardOutput()), this, SLOT(slotKdeConfig()));
     kdeConfig->start("kde4-config", QStringList() << "--prefix");
@@ -105,8 +111,6 @@ void KcmPacmanRepoEditor::loadBackup()
                                                  this,
                                                  i18n("Select backup file")  
                                                );
-//    QFileDialog::getOpenFileName( this, i18n("Select backup file"), QLatin1String("/etc") );
-
     if( file.isEmpty() )
         return;
 
@@ -165,6 +169,10 @@ void KcmPacmanRepoEditor::updateMovers( const QItemSelection &cur, const QItemSe
 
     if( !list.count() )
         return;
+    
+    // enable edit/remove buttons
+    ui.edit->setEnabled(true);
+    ui.remove->setEnabled(true);
 
     int row = list.at( 0 ).row();
 
@@ -215,6 +223,12 @@ void KcmPacmanRepoEditor::removeEntry()
     int row = list.at( 0 ).row();
     repoConf->removeRow( row );
     emit changed(true);
+    if(ui.tableView->model()->rowCount() == 0) {
+        ui.edit->setEnabled(false);
+        ui.remove->setEnabled(false);
+        ui.moveDown->setEnabled(false);
+        ui.moveUp->setEnabled(false);
+    }   
 }
 
 void KcmPacmanRepoEditor::defaults()
@@ -247,7 +261,7 @@ void KcmPacmanRepoEditor::save()
         else // Other error
             KMessageBox::error(this, i18n("Unable to write the (%1) file:\n%2", reply.data()["filename"].toString(), reply.data()["errorDescription"].toString()));
     } else // Writing succeeded
-        KMessageBox::information(this, i18n("Configuration files succesfully written to: /etc/pacman.conf"));
+        KMessageBox::information(this, i18n("/etc/pacman.conf successfully saved"));
 }
 
 void KcmPacmanRepoEditor::slotKdeConfig()

@@ -51,21 +51,6 @@
    <item row="2" column="1">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="edit">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-       <property name="icon">
-        <iconset theme="edit-rename">
-         <normaloff/>
-        </iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="add">
        <property name="styleSheet">
         <string notr="true"/>
@@ -75,6 +60,21 @@
        </property>
        <property name="icon">
         <iconset theme="list-add">
+         <normaloff/>
+        </iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="edit">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+       <property name="icon">
+        <iconset theme="edit-rename">
          <normaloff/>
         </iconset>
        </property>

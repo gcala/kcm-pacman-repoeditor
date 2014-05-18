@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef ADDREPO_H
 #define ADDREPO_H
 
-#include <KDialog>
+#include <QDialog>
 #include "repoconf.h"
 #include "repoentry.h"
 
@@ -28,7 +28,7 @@ namespace Ui {
     class AddRepo;
 }
 
-class AddRepo : public KDialog
+class AddRepo : public QDialog
 {
     Q_OBJECT
 

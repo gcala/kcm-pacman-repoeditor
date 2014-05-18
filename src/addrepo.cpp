@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <QUrl>
 
 AddRepo::AddRepo( QWidget *parent ) :
-    KDialog(parent),
+    QDialog(parent),
     ui(new Ui::AddRepo)
 {
     ui->setupUi( this );
@@ -42,6 +42,10 @@ AddRepo::AddRepo( QWidget *parent ) :
                                    SLOT( selectServerList() ) );
 
     ui->locationCB->setCurrentIndex( 1 ); // 0 : Include, 1 : Server
+    setWindowIcon( QIcon::fromTheme( QLatin1String( "database-chakra" ) ) );
+    
+    ui->repo->setClearButtonShown( true );
+    ui->location->setClearButtonShown( true );
 }
 
 AddRepo::~AddRepo()

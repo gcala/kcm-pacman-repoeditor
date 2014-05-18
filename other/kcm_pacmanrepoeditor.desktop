@@ -9,6 +9,8 @@ X-KDE-ParentApp=kcontrol
 X-KDE-System-Settings-Parent-Category=system-administration
 
 Name=Chakra Repositories Editor
+Name[it]=Editor repository di Chakra
 Comment=Manage Chakra repositories
+Comment[it]=Gestisci i repository di Chakra
 X-KDE-Keywords=repository,editor
 Categories=Qt;KDE;X-KDE-settings-system;
