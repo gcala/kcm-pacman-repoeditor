@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include <QFont>
 #include <QFile>
 #include <QTextStream>
-#include <QMessageBox>
+#include <KLocale>
 
 QString RepoConf::commentString = "";
 QRegExp RepoConf::repoMatch = QRegExp();
@@ -184,7 +184,7 @@ QVariant RepoConf::headerData( int section, Qt::Orientation orientation, int rol
 {
     QStringList headers;
 
-    headers << tr( "Active" ) << tr( "Repository" ) << tr( "Options" );
+    headers << i18n( "Active" ) << i18n( "Repository" ) << i18n( "Address" );
 
     switch( role ) {
         case Qt::DisplayRole:

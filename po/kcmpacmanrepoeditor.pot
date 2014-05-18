@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/gcala/kcmpacmanrepoeditor/issues\n"
-"POT-Creation-Date: 2014-05-18 11:13+0200\n"
+"POT-Creation-Date: 2014-05-18 12:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,51 +127,63 @@ msgstr ""
 msgid "Select mirrors list"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:43
+#: src/kcmpacmanrepoeditor.cpp:46
 msgctxt "@title"
 msgid "Chakra's Repositories Control Module"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:45
+#: src/kcmpacmanrepoeditor.cpp:48
 msgctxt "@title"
 msgid "A KDE Control Module for Chakra's repositories management."
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:46
+#: src/kcmpacmanrepoeditor.cpp:49
 msgctxt "@info:credit"
 msgid "Copyright (C) 2014 Giuseppe Calà"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:48
+#: src/kcmpacmanrepoeditor.cpp:51
 msgctxt "@info:credit"
 msgid "Giuseppe Calà"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:49
+#: src/kcmpacmanrepoeditor.cpp:52
 msgctxt "@info:credit"
 msgid "Main Developer"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:109
+#: src/kcmpacmanrepoeditor.cpp:112
 msgid "Select backup file"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:117
+#: src/kcmpacmanrepoeditor.cpp:120
 msgid ""
 "Can't load backup file.\n"
 "Selected file is not valid."
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:257
+#: src/kcmpacmanrepoeditor.cpp:260
 msgid "Unable to authenticate/execute the action: code %1"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:259
+#: src/kcmpacmanrepoeditor.cpp:262
 msgid ""
 "Unable to write the (%1) file:\n"
 "%2"
 msgstr ""
 
-#: src/kcmpacmanrepoeditor.cpp:261
+#: src/kcmpacmanrepoeditor.cpp:264
 msgid "/etc/pacman.conf successfully saved"
+msgstr ""
+
+#: src/repoconf.cpp:187
+msgid "Active"
+msgstr ""
+
+#: src/repoconf.cpp:187
+msgid "Repository"
+msgstr ""
+
+#: src/repoconf.cpp:187
+msgid "Address"
 msgstr ""
