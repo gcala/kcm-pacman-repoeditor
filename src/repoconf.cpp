@@ -94,6 +94,7 @@ bool RepoConf::loadConf( const QString &eFile )
 
     beginResetModel();
     entries.clear();
+    this->preamble.clear();
 
     QStringList comments;
     while( !confFileStream.atEnd() ) {
