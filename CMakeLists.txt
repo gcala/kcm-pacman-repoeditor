@@ -1,21 +1,35 @@
 project(kcmpacmanrepoeditor)
-set(KCM_PACMANREPOEDITOR_VERSION_MAJOR "0")
-set(KCM_PACMANREPOEDITOR_VERSION_MINOR "1")
-set(KCM_PACMANREPOEDITOR_VERSION_PATCH "1")
-set(KCM_PACMANREPOEDITOR_VERSION "${KCM_PACMANREPOEDITOR_VERSION_MAJOR}.${KCM_PACMANREPOEDITOR_VERSION_MINOR}.${KCM_PACMANREPOEDITOR_VERSION_PATCH}")
+set(KCM_PACMANREPOEDITOR_VERSION "0.2.0")
 
-cmake_minimum_required(VERSION 2.6)
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-find_package(Qt4 4.6.0 REQUIRED)
-find_package(KDE4 4.4.0 REQUIRED)
-include(KDE4Defaults)
+set(QT_MIN_VERSION "5.3.0")
+set(KF5_MIN_VERSION "5.1.0")
 
-include_directories( ${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} )
-include_directories( ${KDE4_INCLUDES} )
-add_definitions( ${KDE4_DEFINITIONS} )
+find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 
-set(kcmpacmanrepoeditor_INCLUDE_DIRS ${KDE4_INCLUDES})
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+include(FeatureSummary)
+
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Widgets
+    DBus
+)
+
+find_package(KF5 REQUIRED COMPONENTS
+    CoreAddons
+    WidgetsAddons
+    KCMUtils
+    I18n
+    Auth
+    WidgetsAddons
+)
+
+find_package( Gettext REQUIRED )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
 
@@ -24,6 +38,4 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/config.h)
 add_subdirectory(other)
 add_subdirectory(resources)
 add_subdirectory(src)
-find_package( Msgfmt REQUIRED )
-find_package( Gettext REQUIRED )
 add_subdirectory(po)

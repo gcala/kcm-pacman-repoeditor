@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2014 Giuseppe Calà <jiveaxe6@gmail.com>                       *
+ * Copyright (C) 2014-2015 Giuseppe Calà <jiveaxe@gmail.com>                   *
  *                                                                             *
  * This program is free software: you can redistribute it and/or modify it     *
  * under the terms of the GNU General Public License as published by the Free  *
@@ -18,22 +18,22 @@
 #ifndef KCMPACMANREPOEDITOR_H
 #define KCMPACMANREPOEDITOR_H
 
-#include "repoconf.h"
-#include "addrepo.h"
-
+#include <KLocalizedString>
 #include <KCModule>
-#include "ui_kcmpacmanrepoeditor.h"
+#include <KMessageWidget>
 
 #include <QItemSelection>
 
-class QProcess;
+#include "repoconf.h"
+#include "addrepo.h"
+#include "ui_kcmpacmanrepoeditor.h"
 
 class KcmPacmanRepoEditor : public KCModule
 {
   Q_OBJECT
 
   public:
-    explicit KcmPacmanRepoEditor(QWidget *parent = 0, const QVariantList &list = QVariantList());
+    explicit KcmPacmanRepoEditor(QWidget *parent = 0, const QVariantList &args = QVariantList());
     
     RepoConf *repoConf;
     AddRepo *addRepoDialog;
@@ -47,13 +47,10 @@ class KcmPacmanRepoEditor : public KCModule
     void load();
         
   private:
-    Ui::KcmPacmanRepoEditor ui;
-    QProcess *kdeConfig;
-    QString kdePrefix;
+    Ui::KcmPacmanRepoEditor ui;    
+    void displayMsgWidget(KMessageWidget::MessageType type, QString msg);
 
-  private slots:
-    void slotKdeConfig();
-    
+  private slots:    
     void moveUp();
     void moveDown();
 

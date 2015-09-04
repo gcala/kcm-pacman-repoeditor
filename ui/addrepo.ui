@@ -7,13 +7,16 @@
     <x>0</x>
     <y>0</y>
     <width>595</width>
-    <height>115</height>
+    <height>142</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Add/Modify Repository</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayoutMsg"/>
+   </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
@@ -27,7 +30,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="KLineEdit" name="repo">
+      <widget class="QLineEdit" name="repo">
        <property name="placeholderText">
         <string>Repository Name</string>
        </property>
@@ -36,7 +39,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Location:</string>
+        <string>Address:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -66,19 +69,23 @@
         </widget>
        </item>
        <item>
-        <widget class="KLineEdit" name="location"/>
+        <widget class="QLineEdit" name="location"/>
        </item>
        <item>
-        <widget class="KPushButton" name="selectLocalDirectory">
+        <widget class="QPushButton" name="selectLocalDirectory">
          <property name="icon">
-          <iconset theme="folder"/>
+          <iconset theme="folder">
+           <normaloff/>
+          </iconset>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="KPushButton" name="selectServerList">
+        <widget class="QPushButton" name="selectServerList">
          <property name="icon">
-          <iconset theme="document-open"/>
+          <iconset theme="document-open">
+           <normaloff/>
+          </iconset>
          </property>
         </widget>
        </item>
@@ -128,18 +135,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

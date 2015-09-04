@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2014 Giuseppe Calà <jiveaxe6@gmail.com>                       *
+ * Copyright (C) 2014-2015 Giuseppe Calà <jiveaxe@gmail.com>                   *
  *                                                                             *
  * This program is free software: you can redistribute it and/or modify it     *
  * under the terms of the GNU General Public License as published by the Free  *
@@ -18,13 +18,13 @@
 #ifndef HELPER_H
 #define HELPER_H
 
-#include <kauth.h>
+#include <KAuth>
 using namespace KAuth;
 
 class Helper : public QObject
 {
   Q_OBJECT
-  public slots:
+  public Q_SLOTS:
     ActionReply save(QVariantMap args);
 };
 

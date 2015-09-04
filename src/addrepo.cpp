@@ -1,26 +1,25 @@
-/*
-Copyright 2011 Simone Tobia
+/*******************************************************************************
+ * Copyright (C) 2014-2015 Giuseppe Calà <jiveaxe@gmail.com>                   *
+ *                                                                             *
+ * This program is free software: you can redistribute it and/or modify it     *
+ * under the terms of the GNU General Public License as published by the Free  *
+ * Software Foundation, either version 3 of the License, or (at your option)   *
+ * any later version.                                                          *
+ *                                                                             *
+ * This program is distributed in the hope that it will be useful, but WITHOUT *
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or       *
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for    *
+ * more details.                                                               *
+ *                                                                             *
+ * You should have received a copy of the GNU General Public License along     *
+ * with this program. If not, see <http://www.gnu.org/licenses/>.              *
+ *******************************************************************************/
 
-This file is part of AppSet.
-
-AppSet is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-AppSet is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with AppSet; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
 #include "addrepo.h"
 #include "ui_addrepo.h"
 
 #include <KMessageBox>
+
 #include <QFileDialog>
 #include <QUrl>
 
@@ -44,8 +43,8 @@ AddRepo::AddRepo( QWidget *parent ) :
     ui->locationCB->setCurrentIndex( 1 ); // 0 : Include, 1 : Server
     setWindowIcon( QIcon::fromTheme( QLatin1String( "database-chakra" ) ) );
     
-    ui->repo->setClearButtonShown( true );
-    ui->location->setClearButtonShown( true );
+    ui->repo->setClearButtonEnabled( true );
+    ui->location->setClearButtonEnabled( true );
 }
 
 AddRepo::~AddRepo()
@@ -87,7 +86,7 @@ int AddRepo::getLocationType() const
 void AddRepo::checkAndApply()
 {
     if( ui->repo->text().remove( RepoConf::commentString ).trimmed().isEmpty() ) {
-        KMessageBox::error( this, i18n( "Can't add repository.\nThe repository name field can't be blank." ) );
+        displayMsgWidget(KMessageWidget::Error, i18n("The repository name field can't be blank"));
     } else if ( RepoConf::matchRepo( RepoEntry::formatRepoName( ui->repo->text() ) ) ) {
         QString prefix = "";
 
@@ -102,10 +101,10 @@ void AddRepo::checkAndApply()
             entry.setDetails( QStringList() << location );
             done( QDialog::Accepted );
         } else {
-            KMessageBox::error( this, i18n( "Can't add repository.\nThe repository location field is not valid." ) );
+            displayMsgWidget(KMessageWidget::Error, i18n("The repository location field is not valid"));
         }
     } else {
-        KMessageBox::error( this, i18n( "Can't add repository.\nThe repository name field is not valid." ) );
+        displayMsgWidget(KMessageWidget::Error, i18n("The repository name field is not valid"));
     }
 }
 
@@ -124,28 +123,27 @@ void AddRepo::locationChanged( int )
 
 void AddRepo::selectLocalRepository()
 {
-    QStringList list;
-    QFileDialog dialog( this );
-    dialog.setDirectory( "/" );
-    dialog.setWindowTitle( i18n( "Select local repository" ) );
-    dialog.setFileMode( QFileDialog::Directory );
-    if( dialog.exec() )
-        list = dialog.selectedFiles();
-    if( list.count() > 0 )
-        ui->location->setText( ( ui->locationCB->currentIndex() == 1 ? QLatin1String( "file://" ) : QString() ) + list.at( 0 ) );
+    QString path = QFileDialog::getExistingDirectory( this,
+                                                      i18n("Select local repository"),
+                                                      "/",
+                                                      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
+    if( path.isEmpty() )
+        return;
+    
+    ui->location->setText( ( ui->locationCB->currentIndex() == 1 ? QLatin1String( "file://" ) : QString() ) + path );
 }
 
 void AddRepo::selectServerList()
 {
-    QStringList list;
-    QFileDialog dialog( this );
-    dialog.setDirectory( "/" );
-    dialog.setWindowTitle( i18n( "Select mirrors list" ) );
-    dialog.setFileMode( QFileDialog::AnyFile );
-    if ( dialog.exec() )
-        list = dialog.selectedFiles();
-    if( list.count() > 0 )
-        ui->location->setText( list.at( 0 ) );
+    QString file = QFileDialog::getOpenFileName( this,
+                                                 i18n("Select mirrors list"),
+                                                 "/",
+                                                 i18n("All files (*.*)")                                                 
+                                               );
+    if( file.isEmpty() )
+        return;
+    
+    ui->location->setText( file );
 }
 
 void AddRepo::resizeEvent( QResizeEvent * event )
@@ -153,4 +151,13 @@ void AddRepo::resizeEvent( QResizeEvent * event )
     ui->selectLocalDirectory->setFixedHeight( ui->location->height() );
     ui->selectServerList->setFixedHeight( ui->location->height() );
     QDialog::resizeEvent( event );
+}
+
+void AddRepo::displayMsgWidget(KMessageWidget::MessageType type, QString msg)
+{
+  KMessageWidget *msgWidget = new KMessageWidget;
+  msgWidget->setText(msg);
+  msgWidget->setMessageType(type);
+  ui->verticalLayoutMsg->insertWidget(0, msgWidget);
+  msgWidget->animatedShow();
 }

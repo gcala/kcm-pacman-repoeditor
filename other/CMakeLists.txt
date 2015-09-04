@@ -1,1 +1,1 @@
-install(FILES kcm_pacmanrepoeditor.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES kcm_pacmanrepoeditor.desktop DESTINATION ${CMAKE_INSTALL_KSERVICES5DIR})

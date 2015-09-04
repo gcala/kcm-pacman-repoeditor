@@ -185,6 +185,9 @@
      </item>
     </layout>
    </item>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayoutMsg"/>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

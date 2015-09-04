@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2014 Giuseppe Calà <jiveaxe6@gmail.com>                       *
+ * Copyright (C) 2014-2015 Giuseppe Calà <jiveaxe@gmail.com>                   *
  *                                                                             *
  * This program is free software: you can redistribute it and/or modify it     *
  * under the terms of the GNU General Public License as published by the Free  *
@@ -23,34 +23,32 @@
 
 #include <config.h>
 
-#include <KFileDialog>
+#include <QFileDialog>
 #include <QProcess>
 
 #include <KAboutData>
 #include <KPluginFactory>
 #include <KMessageBox>
-#include <KAuth/ActionWatcher>
+#include <KAuth>
+
 using namespace KAuth;
 
 K_PLUGIN_FACTORY(kcmpacmanrepoeditorFactory, registerPlugin<KcmPacmanRepoEditor>();)
-K_EXPORT_PLUGIN(kcmpacmanrepoeditorFactory("KcmPacmanRepoEditor"))
 
-KcmPacmanRepoEditor::KcmPacmanRepoEditor( QWidget *parent, const QVariantList &list )
-    : KCModule( kcmpacmanrepoeditorFactory::componentData(), parent, list )
+KcmPacmanRepoEditor::KcmPacmanRepoEditor( QWidget *parent, const QVariantList &args )
+    : KCModule( parent, args )
 {
-    // load translations
-    KGlobal::locale()->insertCatalog("kcmpacmanrepoeditor");
+    KAboutData *about = new KAboutData(QStringLiteral("kcmpacmanrepoeditor"),
+                                     i18n("kcmpacmanrepoeditor"),
+                                     KCM_PACMANREPOEDITOR_VERSION,
+                                     i18n("A KDE Control Module for Chakra's repositories management"),
+                                     KAboutLicense::GPL_V3,
+                                     QStringLiteral("Copyright (C) 2014-2015 Giuseppe Calà"),
+                                     QStringLiteral(),
+                                     QStringLiteral("https://github.com/gcala/kcmpacmanrepoeditor"));
     
-    KAboutData *about = new KAboutData( "kcmpacmanrepoeditor", 
-                                        "kcmpacmanrepoeditor", 
-                                        ki18nc( "@title", "Chakra's Repositories Control Module" ), 
-                                        KCM_PACMANREPOEDITOR_VERSION, 
-                                        ki18nc( "@title", "A KDE Control Module for Chakra's repositories management." ), 
-                                        KAboutData::License_GPL_V3, ki18nc( "@info:credit", "Copyright (C) 2014 Giuseppe Calà" ), 
-                                        KLocalizedString(), "https://github.com/gcala/kcmpacmanrepoeditor" );
-    about->addAuthor( ki18nc( "@info:credit", "Giuseppe Calà" ), 
-                      ki18nc( "@info:credit", "Main Developer" ), 
-                      "jiveaxe@gmail.com" );
+    about->addAuthor(QStringLiteral("Giuseppe Calà"), i18n("Main Developer"), QStringLiteral("jiveaxe@gmail.com"));
+    
     setAboutData( about );  
     ui.setupUi( this );
     setNeedsAuthorization( true );
@@ -96,20 +94,15 @@ KcmPacmanRepoEditor::KcmPacmanRepoEditor( QWidget *parent, const QVariantList &l
     ui.edit->setEnabled(false);  
     ui.moveDown->setEnabled(false);
     ui.remove->setEnabled(false);
-  
-    // Use kde4-config to get kde prefix
-    kdeConfig = new QProcess(this);
-    connect(kdeConfig, SIGNAL(readyReadStandardOutput()), this, SLOT(slotKdeConfig()));
-    kdeConfig->start("kde4-config", QStringList() << "--prefix");
 }
 
 void KcmPacmanRepoEditor::loadBackup()
 {
     RepoConf conf;
-    QString file = KFileDialog::getOpenFileName( KUrl("/etc"),
-                                                 "*.*",
-                                                 this,
-                                                 i18n("Select backup file")  
+    QString file = QFileDialog::getOpenFileName( this,
+                                                 i18n("Select backup file"),
+                                                 "/etc",
+                                                 i18n("All files (*.*)")                                                 
                                                );
     if( file.isEmpty() )
         return;
@@ -117,7 +110,7 @@ void KcmPacmanRepoEditor::loadBackup()
     conf.loadConf( file );
 
     if( !conf.count() ) {
-        KMessageBox::error( this, i18n( "Can't load backup file.\nSelected file is not valid." ) );
+        displayMsgWidget( KMessageWidget::Error, i18n( "Can't load backup file.\nSelected file is not valid." ) );
     } else {
         repoConf->loadConf( file );
         emit changed(true);
@@ -247,25 +240,26 @@ void KcmPacmanRepoEditor::save()
     
     QVariantMap helperArgs;
     helperArgs["pacmanConfFileContents"] = pacmanConfFileContents;
+
+    Action saveAction = authAction();
+    saveAction.setHelperId("org.kde.kcontrol.kcmpacmanrepoeditor");
+    saveAction.setArguments(helperArgs);
     
-    // Call the helper to write the configuration files
-    Action *saveAction = authAction();      
-    saveAction->setArguments(helperArgs);
-    ActionReply reply = saveAction->execute();
+    ExecuteJob *job = saveAction.execute();
     
-    // Respond to reply of the helper
-    if(reply.failed())
-    { // Writing the configuration files failed
-        if (reply.type() == ActionReply::KAuthError) // Authorization error
-            KMessageBox::error(this, i18n("Unable to authenticate/execute the action: code %1", reply.errorCode()));
-        else // Other error
-            KMessageBox::error(this, i18n("Unable to write the (%1) file:\n%2", reply.data()["filename"].toString(), reply.data()["errorDescription"].toString()));
-    } else // Writing succeeded
-        KMessageBox::information(this, i18n("/etc/pacman.conf successfully saved"));
+    if (!job->exec())
+        displayMsgWidget(KMessageWidget::Error, i18n("Unable to authenticate/execute the action: %1", job->error()));
+    else
+        displayMsgWidget(KMessageWidget::Positive, i18n("Repositories successfully written to /etc/pacman.conf"));
 }
 
-void KcmPacmanRepoEditor::slotKdeConfig()
+void KcmPacmanRepoEditor::displayMsgWidget(KMessageWidget::MessageType type, QString msg)
 {
-  // Set a QString containing the kde prefix
-  kdePrefix = QString::fromAscii(kdeConfig->readAllStandardOutput()).trimmed();
+  KMessageWidget *msgWidget = new KMessageWidget;
+  msgWidget->setText(msg);
+  msgWidget->setMessageType(type);
+  ui.verticalLayoutMsg->insertWidget(0, msgWidget);
+  msgWidget->animatedShow();
 }
+
+#include "kcmpacmanrepoeditor.moc"

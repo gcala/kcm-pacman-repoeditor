@@ -1,24 +1,25 @@
-kcmpacmanrepoeditor
-===================
+# kcm-pacman-repoeditor
 
 Pacman repository control module for KDE. Provides a graphical frontend for 
 pacman's repositories management.
+
 Integrates in the System Settings dialogue in KDE.
 
-Installation
-------------
+## Dependencies
+* KDE Framework >= 5.1.0
+* Qt >= 5.3.0
+* Gettext
+
+## Installation
+```
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=\`kde4-config --prefix\` ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make
-make install
+sudo make install
+```
 
 
-Dependencies
-------------
-*   KDE >= 4.4
-*   Qt >= 4.6
+Developed by: **Giuseppe Calà** (<mailto:jiveaxe@gmail.com>)
 
-
-Developed by: Giuseppe Calà (jiveaxe@gmail.com)
-Website: https://github.com/gcala/kcmpacmanrepoeditor
+[GitHub](https://github.com/gcala/kcmpacmanrepoeditor)
